@@ -160,7 +160,7 @@ Change the `TARGET` as needed.
 TARGET=$USER
 GRP=qat
 
-sudo usermod -G $GRP $TARGET
+sudo usermod -aG $GRP $TARGET
 
 sudo chgrp $GRP /dev/qat_*
 sudo chgrp $GRP /dev/usdm_drv
