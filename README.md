@@ -179,10 +179,31 @@ openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout haproxy.key 
 cat haproxy.crt haproxy.key > haproxy.pem
 ```
 
-# Run HA proxy
+# HA proxy
+
+## Systemd configuration file
 
 ```bash
-/usr/sbin/haproxy -f haproxy.conf
+cat /etc/systemd/system/haproxy.service.d/qat-engine.conf
+[Service]
+Environment="OPENSSL_ENGINES=/usr/local/ssl/lib/engines-1.1"
+```
+
+## SElinux configuration
+
+If you want to run the haproxy on the SElinux enforcing mode, the following setttings are required.
+
+```bash
+sudo /sbin/restorecon -v /usr/local/ssl/lib/engines-1.1/qat.so
+sudo ausearch -c 'haproxy' --raw | audit2allow -M my-haproxy
+sudo semodule -i my-haproxy.pp
+sudo setsebool -P haproxy_connect_any 1
+```
+
+## Start haproxy 
+
+```bash
+systemctl start haproxy.service
 ```
 
 # Run web server
