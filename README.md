@@ -152,26 +152,20 @@ Make sure the new configuration is sucessfully loaded. You should see something 
 [24111.665487] c6xxvf 0000:08:00.0: Starting acceleration device qat_dev0.
 ```
 
-# Create new group, add user and change permissions
+# Change permissions and security limits
 
-Change the `TARGET` as needed.
 
 ```bash
-TARGET=$USER
-GRP=qat
+sudo chgrp haproxy /dev/qat_*
+sudo chgrp haproxy /dev/usdm_drv
+sudo chgrp haproxy /dev/uio*
 
-sudo usermod -aG $GRP $TARGET
+echo "@haproxy - memlock 4096" | sudo tee -a /etc/security/limits.conf
 
-sudo chgrp $GRP /dev/qat_*
-sudo chgrp $GRP /dev/usdm_drv
-sudo chgrp $GRP /dev/uio*
-
-echo "@qat - memlock 4096" | sudo tee -a /etc/security/limits.conf
-
-echo "@qat - nofile 8192" | sudo tee -a /etc/security/limits.conf
+echo "@haproxy - nofile 8192" | sudo tee -a /etc/security/limits.conf
 ```
 
-# Generate certs
+# Generate certificates for HA proxy
 
 ```bash
 FQDN=localhost
@@ -179,7 +173,7 @@ openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout haproxy.key 
 cat haproxy.crt haproxy.key > haproxy.pem
 ```
 
-# HA proxy
+# Configuring and running HA proxy
 
 ## Configuration file
 
