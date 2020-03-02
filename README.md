@@ -181,17 +181,27 @@ cat haproxy.crt haproxy.key > haproxy.pem
 
 # HA proxy
 
-## Systemd configuration file
+## Configuration file
+
+Copy the certifiicate and `haproxy.cfg` to correct location.
 
 ```bash
-cat /etc/systemd/system/haproxy.service.d/qat-engine.conf
+sudo cp haproxy.pem /etc/haproxy/
+sudo cp haproxy.cfg /etc/haproxy/
+```
+
+## Systemd configuration file
+
+Add the following systemd unit configuration file to `/etc/systemd/system/haproxy.service.d/qat-engine.conf`
+
+```bash
 [Service]
 Environment="OPENSSL_ENGINES=/usr/local/ssl/lib/engines-1.1"
 ```
 
 ## SElinux configuration
 
-If you want to run the haproxy on the SElinux enforcing mode, the following setttings are required.
+If you want to run the haproxy on the SElinux enforcing mode, at least the following setttings are needed.
 
 ```bash
 sudo /sbin/restorecon -v /usr/local/ssl/lib/engines-1.1/qat.so
@@ -204,6 +214,13 @@ sudo setsebool -P haproxy_connect_any 1
 
 ```bash
 systemctl start haproxy.service
+```
+
+Make sure the engine is sucessfully started via the following commands.
+
+```bash
+systemctl status haproxy.service
+journalctl -u  haproxy.service
 ```
 
 # Run web server
