@@ -76,13 +76,10 @@ sudo make install
 
 ```bash
 cd $HOME
-export QAT_ENGINE_VERSION="v0.5.42"
+export QAT_ENGINE_VERSION="v0.5.43"
 export ICP_ROOT=$HOME/QAT
-export LIBRPATH=/usr/local/ssl
 export LD_LIBRARY_PATH=/usr/local/ssl/lib
 export OPENSSL_ENGINES=/usr/local/ssl/lib/engines-1.1
-export PERL5LIB=$PERL5LIB:$PWD/openssl
-
 ```
 
 ```bash
@@ -94,10 +91,7 @@ git checkout $QAT_ENGINE_VERSION
 ./configure \
 --with-qat_dir=$HOME/QAT \
 --with-openssl_dir=$HOME/openssl \
---with-openssl_install_dir=/usr/local/ssl \
---enable-upstream_driver \
---enable-usdm \
---enable-qat_skip_err_files_build 
+--with-openssl_install_dir=/usr/local/ssl
 make
 sudo make install
 ```
