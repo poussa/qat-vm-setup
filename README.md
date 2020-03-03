@@ -52,7 +52,8 @@ Same as in host case but with the guest option.
 ```bash
 mkdir QAT
 cd QAT
-curl -O https://01.org/sites/default/files/downloads/qat1.7.l.4.7.0-00006.tar.gz
+curl -LO https://01.org/sites/default/files/downloads/qat1.7.l.4.8.0-00005.tar.gz
+tar xzf qat1.7.l.4.8.0-00005.tar.gz
 export ICP_ROOT=$PWD
 ./configure --enable-icp-sriov=guest
 make
