@@ -80,6 +80,7 @@ export QAT_ENGINE_VERSION="v0.5.43"
 export ICP_ROOT=$HOME/QAT
 export LD_LIBRARY_PATH=/usr/local/ssl/lib
 export OPENSSL_ENGINES=/usr/local/ssl/lib/engines-1.1
+export PERL5LIB=$PERL5LIB:$HOME/openssl
 ```
 
 ```bash
