@@ -10,7 +10,7 @@ These instructions has been tested on Centos 7 & 8 and Debian 9.
 mkdir QAT
 cd QAT
 curl -LO https://01.org/sites/default/files/downloads/qat1.7.l.4.8.0-00005.tar.gz
-tar xzf qat1.7.l.4.7.0-00006.tar.gz
+tar xzf qat1.7.l.4.8.0-00005.tar.gz
 export ICP_ROOT=$PWD
 ./configure --enable-icp-sriov=host
 make
