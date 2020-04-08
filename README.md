@@ -9,8 +9,8 @@ These instructions has been tested on Centos 7 & 8 and Debian 9.
 ```bash
 mkdir QAT
 cd QAT
-curl -O https://01.org/sites/default/files/downloads//qat1.7.l.4.7.0-00006.tar.gz
-tar xzf qat1.7.l.4.7.0-00006.tar.gz
+curl -LO https://01.org/sites/default/files/downloads/qat1.7.l.4.8.0-00005.tar.gz
+tar xzf qat1.7.l.4.8.0-00005.tar.gz
 export ICP_ROOT=$PWD
 ./configure --enable-icp-sriov=host
 make
@@ -52,7 +52,8 @@ Same as in host case but with the guest option.
 ```bash
 mkdir QAT
 cd QAT
-curl -O https://01.org/sites/default/files/downloads/qat1.7.l.4.7.0-00006.tar.gz
+curl -LO https://01.org/sites/default/files/downloads/qat1.7.l.4.8.0-00005.tar.gz
+tar xzf qat1.7.l.4.8.0-00005.tar.gz
 export ICP_ROOT=$PWD
 ./configure --enable-icp-sriov=guest
 make
@@ -80,6 +81,7 @@ export QAT_ENGINE_VERSION="v0.5.43"
 export ICP_ROOT=$HOME/QAT
 export LD_LIBRARY_PATH=/usr/local/ssl/lib
 export OPENSSL_ENGINES=/usr/local/ssl/lib/engines-1.1
+export PERL5LIB=$PERL5LIB:$HOME/openssl
 ```
 
 ```bash
