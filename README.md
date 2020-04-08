@@ -162,7 +162,7 @@ echo "@haproxy - nofile 8192" | sudo tee -a /etc/security/limits.conf
 # Generate certificates for HA proxy
 
 ```bash
-FQDN=localhost
+FQDN=$(hostname)
 openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout haproxy.key -out haproxy.crt -subj "/C=FI/O=Intel SSP/CN=${FQDN}"
 cat haproxy.crt haproxy.key > haproxy.pem
 ```
@@ -220,5 +220,5 @@ node server.js
 # Do HTTP Query
 
 ```bash
-curl --cacert haproxy.crt https://localhost:8443
+curl --noproxy "*" --cacert haproxy.crt https://$(hostname)
 ``` 
